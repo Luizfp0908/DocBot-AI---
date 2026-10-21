@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -144,6 +145,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="chat-card">
@@ -157,7 +159,8 @@
 
         <div class="chat-body" id="chatContainer">
             <div class="message bot">
-                Olá! Sou o DocBot AI. Descreva seus sintomas ou informe a modalidade do atendimento para iniciarmos a triagem.
+                Olá! Sou o DocBot AI. Descreva seus sintomas ou informe a modalidade do atendimento para iniciarmos a
+                triagem.
             </div>
         </div>
 
@@ -173,14 +176,16 @@
             let sintomaNormalizado = sintoma.toLowerCase();
             let respostaBot = "";
 
-            // Regra inicial de triagem
-            if (sintomaNormalizado.includes("plano") || sintomaNormalizado.includes("convenio") || sintomaNormalizado.includes("unimed")) {
-                respostaBot = "[CONVÊNIO ACEITO] Encaminhado para rede credenciada. Copagamento: R$ 35,00";
-            } else {
-                respostaBot = "[TRIAGEM PADRÃO] Encaminhado para consulta geral. Valor: R$ 150,00";
-            }
+        // Ticket #101 (Pronto-Socorro) + Ticket #102 (Plano de Saúde)
+        if (sintomaNormalizado.includes("dor no peito") || sintomaNormalizado.includes("falta de ar")) {
+            respostaBot = "[EMERGÊNCIA VERMELHA] Dirija-se ao pronto-socorro. Custo: ISENTO (R$ 0,00)";
+        } else if (sintomaNormalizado.includes("plano") || sintomaNormalizado.includes("convenio") || sintomaNormalizado.includes("convênio") || sintomaNormalizado.includes("unimed")) {
+            respostaBot = "[CONVÊNIO ACEITO] Encaminhado para rede credenciada. Copagamento: R$ 35,00";
+        } else {
+            respostaBot = "[TRIAGEM PADRÃO] Encaminhado para consulta geral. Valor: R$ 150,00";
+        }
 
-            return respostaBot;
+            return respostaBot;  
         }
 
         // Interface do chat
@@ -215,4 +220,5 @@
         }
     </script>
 </body>
+
 </html>
